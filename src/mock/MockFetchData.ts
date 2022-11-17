@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 /* eslint-disable @typescript-eslint/no-throw-literal */
 function fetchUser(userId: number) {
   let user: any = null;

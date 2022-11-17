@@ -1,13 +1,21 @@
 import React, { Suspense } from 'react';
-import { Spin } from 'antd';
+import { Spin, Row, Col } from 'antd';
 import styled from 'styled-components';
 import fetchData from '../mock/MockFetchData';
-import { User } from '../components';
+import { User, DataExplorer } from '../components';
 
 export default function TestPage() {
+  // TODO: 같은 계층에 모달을 실행하면, 리렌더링 됨 !
   return (
     <>
-      <h2>asdf</h2>
+      <Row>
+        <DataExplorer />
+        <Col xs={12}>
+          <h2>요기는 두번재 영역</h2>
+        </Col>
+      </Row>
+
+      {/* suspense 이용  */}
       <Suspense
         fallback={
           <SpinWrapper>

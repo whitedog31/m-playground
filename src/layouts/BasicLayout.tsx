@@ -11,6 +11,7 @@ export default function BasicLayout() {
   return (
     <Layout>
       <YennferHeader>Header</YennferHeader>
+      {/* TODO: subheader */}
       <YennferMain>
         <Outlet />
       </YennferMain>
@@ -20,13 +21,13 @@ export default function BasicLayout() {
 }
 
 const YennferHeader = styled(Header)`
-  border: 1px solid red;
   height: 56px;
+  background-color: #001529;
 `;
 
 const YennferFooter = styled(Footer)`
-  border: 1px solid blue;
   height: 56px;
+  background-color: #dbdfe7;
 `;
 const YennferMain = styled(Content)`
   min-height: calc(100vh - 112px);

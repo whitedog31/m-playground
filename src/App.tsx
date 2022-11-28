@@ -1,5 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { TestPage, HomePage, NotFoundPage, ProjectDetailPage } from './pages';
+import {
+  TestPage,
+  UploadPage,
+  NotFoundPage,
+  ProjectDetailPage,
+  TokenPage,
+} from './pages';
 import GlobalStyle from './styles/global-styles';
 import { BasicLayout } from './layouts';
 
@@ -8,9 +14,10 @@ export function App() {
     <Routes>
       <Route path="/" element={<BasicLayout />}>
         <Route path="" element={<TestPage />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="upload" element={<UploadPage />} />
+        <Route path="token-test" element={<TokenPage />} />
         <Route path="project/:id" element={<ProjectDetailPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

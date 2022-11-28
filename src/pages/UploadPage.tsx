@@ -1,55 +1,64 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/function-component-definition */
-import React from 'react';
-import { StarOutlined, UploadOutlined } from '@ant-design/icons';
-import type { UploadProps } from 'antd';
-import { Button, Upload } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Modal, message, Row, Col } from 'antd';
+import { useModal, useHandleUpload } from '../hooks';
 
-const props: UploadProps = {
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange({ file, fileList }) {
-    if (file.status !== 'uploading') {
-      console.log(file, fileList);
-    }
-  },
-  defaultFileList: [
-    {
-      uid: '1',
-      name: 'xxx.png',
-      status: 'done',
-      response: 'Server Error 500', // custom error message to show
-      url: 'http://www.baidu.com/xxx.png',
-    },
-    {
-      uid: '2',
-      name: 'yyy.png',
-      status: 'done',
-      url: 'http://www.baidu.com/yyy.png',
-    },
-    {
-      uid: '3',
-      name: 'zzz.png',
-      status: 'error',
-      response: 'Server Error 500', // custom error message to show
-      url: 'http://www.baidu.com/zzz.png',
-    },
-  ],
-  showUploadList: {
-    showDownloadIcon: true,
-    downloadIcon: 'Download',
-    showRemoveIcon: true,
-    removeIcon: (
-      <StarOutlined
-        onClick={(e) => console.log(e, 'custom removeIcon event')}
-      />
-    ),
-  },
-};
+export default function UploadPage() {
+  const { isModalOpen, showModal, handleCancel, handleOk } = useModal();
+  const {
+    currentFile,
+    inputDirRef,
+    inputRef,
+    handleChangeFile,
+    handleUploadClick,
+    handleDirUploadClick,
+  } = useHandleUpload();
 
-const App: React.FC = () => (
-  <Upload {...props}>
-    <Button icon={<UploadOutlined />}>Upload</Button>
-  </Upload>
-);
+  return (
+    <>
+      <Row>
+        <Col span={24}>
+          <Row justify="center">
+            <Button onClick={showModal}> 업로드 모달</Button>
+          </Row>
+        </Col>
+      </Row>
+      <Modal
+        title="Basic Modal"
+        centered
+        destroyOnClose
+        width="850px"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Row>
+          <Col span={24}>
+            <input
+              ref={inputRef}
+              type="file"
+              name="fileList"
+              multiple
+              hidden
+              onChange={handleChangeFile}
+            />
+            <input
+              ref={inputDirRef}
+              type="file"
+              name="fileList"
+              multiple
+              hidden
+              onChange={handleChangeFile}
+            />
+            <Button onClick={handleUploadClick}> 파일 업로드 </Button>
+            <Button onClick={handleDirUploadClick}> 폴더 업로드 </Button>
+          </Col>
+        </Row>
 
-export default App;
+        <Row>
+          <Col span={24}>{currentFile || ''}</Col>
+        </Row>
+      </Modal>
+    </>
+  );
+}

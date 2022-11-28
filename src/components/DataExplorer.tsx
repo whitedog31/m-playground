@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Image, Col, Modal, Button } from 'antd';
-import { useModal } from '../hooks';
+import { useModal, useHandleUpload } from '../hooks';
 
 export default function DataExplorer() {
   const [currentFile, setCurrentFile] = useState<any>(null);
@@ -30,8 +30,8 @@ export default function DataExplorer() {
   return (
     <>
       <Col xs={12}>
-        <h2>파일 업로드</h2>
-        <input ref={inputRef} type="file" hidden onChange={handleChangeFile} />
+        {/* <h2>파일 업로드</h2> */}
+        {/* <input ref={inputRef} type="file" hidden onChange={handleChangeFile} /> */}
         <Button onClick={showModal}>업로드 모달</Button>
       </Col>
       <Modal
@@ -40,7 +40,7 @@ export default function DataExplorer() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Image
+        {/* <Image
           width={200}
           height={200}
           src={currentFile}
@@ -48,7 +48,7 @@ export default function DataExplorer() {
         />
         <Button type="link" onClick={handleUploadClick}>
           업로드
-        </Button>
+        </Button> */}
       </Modal>
     </>
   );
